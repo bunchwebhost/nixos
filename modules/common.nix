@@ -60,7 +60,6 @@
     fastfetch
     git
     vim
-    neovim
     curl
     dnsutils
     ethtool
