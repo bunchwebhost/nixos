@@ -1,5 +1,5 @@
 {
-  description = "Twilight";
+  description = "NixOS Flake - Bunch Webhost";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
