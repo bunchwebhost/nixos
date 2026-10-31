@@ -66,5 +66,7 @@
     tcpdump
     pciutils
     usbutils
+    age
+    sops
   ];
 }
