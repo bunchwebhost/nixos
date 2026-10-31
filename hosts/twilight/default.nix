@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./router.nix
     ./home.nix
+    ./k3s.nix
     ../../modules/common.nix
   ];
 

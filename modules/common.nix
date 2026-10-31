@@ -68,5 +68,7 @@
     usbutils
     age
     sops
+    ssh-to-age
+    openssl
   ];
 }

@@ -1,0 +1,11 @@
+keys:
+  - &twilight    age1vts7vr5ex0gedueyeuqt0z0uc2pkjfa29ake2xe2p43e5fwxryrsxgtxq6
+  - &fluttershy  age1sgt8vl9akkvc3g7q6gcm08nquqhyylc47r2rc7h4vyzzrx0adf8sk9vqra
+  - &rainbowdash age1nrllqnlkpdwvs77thtrqdu98mr7h3cf5kak3f6sny0gd5fgrfgqsjndxys
+  - &rarity      age1qqr3walz4vq49v696gfc4atadv5jx0v38r6sedfhkhtz7kpxle2s4fftx8
+  - &pinkiepie   age1wqq8ukrhm2kv4slxp0nmxvjdvelvpjn2jqlg5c2lxs8gkkfhcqys3fsqdg
+  - &applejack   age1zqzmzkrtzrvm0a52h5045rtcw8w48mtj4rxtyf30d0hk7pms53psd0nqkl
+creation_rules:
+  - path_regex: secrets/k3s\.yaml$
+    key_groups:
+      - age: [*twilight, *fluttershy, *rainbowdash, *rarity, *pinkiepie, *applejack]

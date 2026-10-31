@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./k3s.nix
     ../../modules/common.nix
     ../../modules/node.nix
   ];

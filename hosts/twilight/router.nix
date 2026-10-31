@@ -52,12 +52,23 @@ in
   };
 
   networking.firewall.interfaces.${lanNic} = {
-    allowedTCPPorts = [ 53 ];
+    allowedTCPPorts = [ 
+      53
+      6443
+      2379
+      2380
+      10250
+    ];
     allowedUDPPorts = [
       53
       67
+      8472
     ];
   };
+  networking.firewall.interfaces.cni0.allowedTCPPorts = [
+    6443
+    10250
+  ];
 
   networking.firewall.interfaces.${homeNic}.allowedTCPPorts = [ 22 ];
 
@@ -69,6 +80,9 @@ in
         ct state established,related accept
         ct state invalid drop
         iifname "${lanNic}" oifname "${wanNic}" accept
+        # k3s pod traffic; WAN can't reach pods through NodePorts
+        iifname { "cni0", "flannel.1" } accept
+        iifname "${lanNic}" oifname { "cni0", "flannel.1" } accept
       }
     '';
   };
