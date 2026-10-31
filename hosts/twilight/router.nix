@@ -111,7 +111,7 @@ in
       dhcp-host = [
         "9c:7b:ef:27:ac:0a,fluttershy,10.0.0.2"
         "e4:e7:49:51:46:7c,rainbowdash,10.0.0.3"
-        "e4:e7:49:51:45:bd,rarity,10.0.0.4"
+        "e4:e7:49:51:4a:ec,rarity,10.0.0.4"
         "e4:e7:49:51:49:cd,pinkiepie,10.0.0.5"
         "e4:e7:49:51:4b:7a,applejack,10.0.0.6"
       ];
