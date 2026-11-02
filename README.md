@@ -62,7 +62,7 @@ fluttershy rainbowdash  rarity    pinkiepie  applejack
 | ----------------------------------------- | ---------------------------------------------------------- |
 | twilight, WAN                             | UDP 41641 (Tailscale)                                      |
 | twilight, home LAN                        | TCP 22                                                     |
-| twilight, `tailscale0`                    | TCP 22                                                     |
+| twilight, `tailscale0`                    | TCP 22, 6443                                               |
 | twilight, cluster                         | TCP/UDP 53, UDP 67, TCP 6443, 2379–2380, 10250, UDP 8472   |
 | twilight, `cni0` (its own pods)           | TCP 6443, 10250                                            |
 | k3s servers (fluttershy, rainbowdash)     | TCP 22, 6443, 2379–2380, 10250, UDP 8472                   |
@@ -84,7 +84,9 @@ goes down.
   interface are pinned to the cluster NIC (`10.0.0.1`, `enp0s20f0u9`).
   Otherwise k3s would pick the WAN interface, because that's where the default
   route is. The kubeconfig at `/etc/rancher/k3s/k3s.yaml` is readable by the
-  `wheel` group instead of only root.
+  `wheel` group instead of only root. To use kubectl from a tailnet device, copy
+  it and change `server:` to `https://10.0.0.1:6443`, which is already in the
+  API server's certificate.
 - **fluttershy** and **rainbowdash** are the other two servers.
 - **rarity**, **pinkiepie** and **applejack** are agents.
 

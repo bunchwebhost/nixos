@@ -79,7 +79,10 @@ in
     extraSetFlags = [ "--advertise-routes=${lanSubnet}" ];
   };
   networking.firewall.interfaces.${wanNic}.allowedUDPPorts = [ config.services.tailscale.port ];
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 22 ];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
+    22
+    6443
+  ];
 
   networking.nftables.tables.gateway-forward = {
     family = "inet";
