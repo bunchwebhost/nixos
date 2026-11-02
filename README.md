@@ -86,7 +86,9 @@ goes down.
   route is. The kubeconfig at `/etc/rancher/k3s/k3s.yaml` is readable by the
   `wheel` group instead of only root. To use kubectl from a tailnet device, copy
   it and change `server:` to `https://10.0.0.1:6443`, which is already in the
-  API server's certificate.
+  API server's certificate. twilight also adds its Tailscale IP and name to the
+  certificate (`--tls-san`), for devices that twilight is shared with but that
+  don't get the `10.0.0.0/24` route.
 - **fluttershy** and **rainbowdash** are the other two servers.
 - **rarity**, **pinkiepie** and **applejack** are agents.
 

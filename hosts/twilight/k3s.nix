@@ -13,6 +13,8 @@
       "--flannel-iface=enp0s20f0u9"
       "--write-kubeconfig-mode=0640"
       "--write-kubeconfig-group=wheel"
+      "--tls-san=100.98.251.30"
+      "--tls-san=twilight.tail6416b0.ts.net"
     ];
   };
 }
