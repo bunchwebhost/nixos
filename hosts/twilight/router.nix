@@ -7,6 +7,7 @@ let
   # Cluster Switch
   lanNic = "enp0s20f0u9";
   lanAddress = "10.0.0.1";
+  lanSubnet = "10.0.0.0/24";
 
   # Home Network
   homeNic = "eno1";
@@ -72,7 +73,11 @@ in
 
   networking.firewall.interfaces.${homeNic}.allowedTCPPorts = [ 22 ];
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "server";
+    extraSetFlags = [ "--advertise-routes=${lanSubnet}" ];
+  };
   networking.firewall.interfaces.${wanNic}.allowedUDPPorts = [ config.services.tailscale.port ];
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 22 ];
 
@@ -84,6 +89,7 @@ in
         ct state established,related accept
         ct state invalid drop
         iifname "${lanNic}" oifname "${wanNic}" accept
+        iifname "tailscale0" oifname "${lanNic}" accept
         # k3s pod traffic; WAN can't reach pods through NodePorts
         iifname { "cni0", "flannel.1" } accept
         iifname "${lanNic}" oifname { "cni0", "flannel.1" } accept

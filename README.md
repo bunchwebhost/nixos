@@ -43,14 +43,17 @@ fluttershy rainbowdash  rarity    pinkiepie  applejack
   by MAC address (set in [router.nix](hosts/twilight/router.nix)). Other clients
   get an address from `10.0.0.10`–`10.0.0.254`. DNS is forwarded to Cloudflare
   (`1.1.1.1`, `1.0.0.1`) and the local domain is `bwh`, so nodes can reach each
-  other as `<host>.bwh`. The cluster is IPv4-only.
-- **Forwarding:** twilight forwards three kinds of traffic: from the cluster out
-  to the WAN, return traffic for established connections, and k3s pod traffic.
-  Pod traffic means anything arriving on `cni0` or `flannel.1`, plus anything
-  from the cluster LAN headed to them. Nothing from the WAN is forwarded to
-  pods, so NodePorts can't be reached from the internet. Nodes and the home LAN
-  can't route to each other, so to reach a node from the home LAN you go through
-  twilight. The exception is pods running on twilight itself. The `cni0` rule
+  other as `<host>.bwh`. The cluster is IPv4-only. twilight advertises
+  `10.0.0.0/24` to the tailnet as a Tailscale subnet route.
+- **Forwarding:** twilight forwards four kinds of traffic: from the cluster out
+  to the WAN, from the tailnet into the cluster, return traffic for established
+  connections, and k3s pod traffic. Tailscale masquerades tailnet traffic, so
+  nodes see it coming from `10.0.0.1`. Pod traffic means anything arriving on
+  `cni0` or `flannel.1`, plus anything from the cluster LAN headed to them.
+  Nothing from the WAN is forwarded to pods, so NodePorts can't be reached from
+  the internet. Nodes and the home LAN can't route to each other, so to reach a
+  node from the home LAN you go through twilight or the tailnet. The exception
+  is pods running on twilight itself. The `cni0` rule
   doesn't limit the outgoing interface, so those pods can reach the home LAN.
 
 ### Firewall
