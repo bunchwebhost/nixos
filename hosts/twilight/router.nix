@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 let
   # Direct NBN Connection
@@ -71,6 +71,10 @@ in
   ];
 
   networking.firewall.interfaces.${homeNic}.allowedTCPPorts = [ 22 ];
+
+  services.tailscale.enable = true;
+  networking.firewall.interfaces.${wanNic}.allowedUDPPorts = [ config.services.tailscale.port ];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 22 ];
 
   networking.nftables.tables.gateway-forward = {
     family = "inet";

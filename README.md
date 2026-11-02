@@ -35,8 +35,8 @@ fluttershy rainbowdash  rarity    pinkiepie  applejack
  10.0.0.2   10.0.0.3   10.0.0.4   10.0.0.5   10.0.0.6
 ```
 
-- **WAN:** the NBN link is twilight's only default route. No inbound ports are
-  open on it.
+- **WAN:** the NBN link is twilight's only default route. The only inbound port
+  open on it is Tailscale's WireGuard port (UDP 41641).
 - **Home LAN:** twilight takes a DHCP address from the home router but ignores
   its gateway, routes and DNS. The only thing this interface is for is SSH in.
 - **Cluster:** twilight is `10.0.0.1` and runs dnsmasq. Nodes get fixed leases
@@ -57,8 +57,9 @@ fluttershy rainbowdash  rarity    pinkiepie  applejack
 
 | Where                                     | Open                                                       |
 | ----------------------------------------- | ---------------------------------------------------------- |
-| twilight, WAN                             | nothing                                                    |
+| twilight, WAN                             | UDP 41641 (Tailscale)                                      |
 | twilight, home LAN                        | TCP 22                                                     |
+| twilight, `tailscale0`                    | TCP 22                                                     |
 | twilight, cluster                         | TCP/UDP 53, UDP 67, TCP 6443, 2379–2380, 10250, UDP 8472   |
 | twilight, `cni0` (its own pods)           | TCP 6443, 10250                                            |
 | k3s servers (fluttershy, rainbowdash)     | TCP 22, 6443, 2379–2380, 10250, UDP 8472                   |
@@ -127,7 +128,7 @@ modules/
 hosts/
   twilight/
     default.nix
-    router.nix             # interfaces, NAT, nftables forward chain, dnsmasq, k3s ports
+    router.nix             # interfaces, NAT, nftables forward chain, dnsmasq, k3s ports, Tailscale
     home.nix               # home-manager for liam (git with SSH commit signing)
     k3s.nix                # k3s server that initialises the cluster
     hardware-configuration.nix
