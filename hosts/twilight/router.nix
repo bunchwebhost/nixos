@@ -5,12 +5,9 @@ let
   wanNic = "enp0s20f0u12";
 
   # Cluster Switch
-  lanNic = "enp0s20f0u9";
+  lanNic = "eno1";
   lanAddress = "10.0.0.1";
   lanSubnet = "10.0.0.0/24";
-
-  # Home Network
-  homeNic = "eno1";
 in
 {
   systemd.network.networks."10-wan" = {
@@ -20,20 +17,6 @@ in
       IPv6AcceptRA = true;
     };
     linkConfig.RequiredForOnline = "routable";
-  };
-
-  systemd.network.networks."20-home" = {
-    matchConfig.Name = homeNic;
-    networkConfig = {
-      DHCP = "ipv4";
-      IPv6AcceptRA = false;
-    };
-    dhcpV4Config = {
-      UseGateway = false;
-      UseRoutes = false;
-      UseDNS = false;
-    };
-    linkConfig.RequiredForOnline = "no";
   };
 
   systemd.network.networks."30-cluster" = {
@@ -70,8 +53,6 @@ in
     6443
     10250
   ];
-
-  networking.firewall.interfaces.${homeNic}.allowedTCPPorts = [ 22 ];
 
   services.tailscale = {
     enable = true;

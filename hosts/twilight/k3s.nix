@@ -10,7 +10,7 @@
     clusterInit = true;
     extraFlags = [
       "--node-ip=10.0.0.1"
-      "--flannel-iface=enp0s20f0u9"
+      "--flannel-iface=eno1"
       "--write-kubeconfig-mode=0640"
       "--write-kubeconfig-group=wheel"
       "--tls-san=100.98.251.30"
