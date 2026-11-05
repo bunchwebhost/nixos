@@ -1,10 +1,7 @@
 { config, ... }:
 
 let
-  # Direct NBN Connection
   wanNic = "enp0s20f0u12";
-
-  # Cluster Switch
   lanNic = "eno1";
   lanAddress = "10.0.0.1";
   lanSubnet = "10.0.0.0/24";
