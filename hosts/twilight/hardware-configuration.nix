@@ -30,12 +30,6 @@
       options = [ "nofail" ];
     };
 
-  fileSystems."/mnt/storage2" =
-    { device = "/dev/disk/by-uuid/f4e6272c-0e1f-42f9-9802-b8b61d133cb1";
-      fsType = "ext4";
-      options = [ "nofail" ];
-    };
-
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
