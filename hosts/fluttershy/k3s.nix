@@ -8,6 +8,9 @@
     role = "server";
     tokenFile = config.sops.secrets.k3s-token.path;
     serverAddr = "https://10.0.0.1:6443";
+    extraFlags = [
+      "--disable=local-storage"
+    ];
   };
 
   networking.firewall = {
