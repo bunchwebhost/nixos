@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  imports = [ ./smartd.nix ];
+
   # Nix
   nix.settings = {
     experimental-features = [
@@ -53,7 +55,6 @@
   # Hardware care
   hardware.enableRedistributableFirmware = true;
   services.fstrim.enable = true;
-  services.smartd.enable = true;
 
   # System packages
   environment.systemPackages = with pkgs; [

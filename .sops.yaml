@@ -9,3 +9,6 @@ creation_rules:
   - path_regex: secrets/k3s\.yaml$
     key_groups:
       - age: [*twilight, *fluttershy, *rainbowdash, *rarity, *pinkiepie, *applejack]
+  - path_regex: secrets/smtp\.yaml$
+    key_groups:
+      - age: [*twilight, *fluttershy, *rainbowdash, *rarity, *pinkiepie, *applejack]
